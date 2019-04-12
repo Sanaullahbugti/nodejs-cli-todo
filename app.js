@@ -1,6 +1,6 @@
 const yargs = require("yargs");
 const chalk = require("chalk");
-const { addTask, deleteTask } = require("./taskTodo");
+const { addTask, deleteTask ,getAll} = require("./taskTodo");
 yargs.command({
   command: "add",
   builder: {
@@ -19,9 +19,6 @@ yargs.command({
   },
   handler: ({ title, discription }) => {
     addTask(title, discription);
-    console.log(
-      `task added with title ${chalk.bgGreenBright.red(title)} to the list`
-    );
   }
 });
 yargs.command({
@@ -38,4 +35,17 @@ yargs.command({
     deleteTask(title);
   }
 });
+yargs.command({
+  command:"getall",
+  builder:{
+    title:{
+      discription:"Get All Data From List",
+      alias:"v",
+      demandOption:false,
+    }
+  },
+  handler:()=>{
+    getAll();
+  }
+})
 yargs.parse();
